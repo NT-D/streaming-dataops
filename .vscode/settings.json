@@ -1,0 +1,8 @@
+{
+    "python.pythonPath": "/usr/local/bin/python",
+    "python.linting.pylintArgs": [
+        "--generated-members=pyspark.*",
+        "--extension-pkg-whitelist=pyspark",
+        "--ignored-modules=pyspark.sql.functions",
+    ]
+}
