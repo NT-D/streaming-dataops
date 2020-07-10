@@ -35,7 +35,7 @@ schema = StructType([
 
 schemaedStreamDf = rowStreamDf.select(from_json("value", schema).alias("json")) \
     .select(col("json.temperature").alias("temperature"),
-            col("json.humidity").alias("humidity")
+            col("json.humidity").alias("humidity") \
     )
 
 # Write data in the console

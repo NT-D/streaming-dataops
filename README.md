@@ -1,15 +1,25 @@
+TODO: 
+- Documentation
+    - Update repository problem statement (motivation) and goal.
+    - Add architecutre diagram
+- Add Unit test
+- Add CI/CD pipeline including submit spark jobs
+- Monitor streaming and alert to admin team whenever streaming job fail
+
 # streaming-dataops
 - Sample repo for understanding spark structured streaming and data ops
 - You can utilize device simulator in my [GitHub](https://github.com/NT-D/streaming-dataops-device). It can send expected telemetry to IoT Hub and Spark.
 
-## Run app
+## How to run app
+1. If you are new for developing inside a container, please read [this document](https://code.visualstudio.com/docs/remote/containers) and setup environment by refering [Getting started](https://code.visualstudio.com/docs/remote/containers#_getting-started).
+1. Clone and open repository inside the container with [this document](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume).
 1. Set environment variable with event hub (IoT Hub) information
-```
+```shell
 export EVENTHUB_CONNECTION_STRING="{Your event hub connection string}"
 export EVENTHUB_NAMESPACE="{Your event hub name space}"
 export EVENT_HUB_NAME="{Your event hub name}"
 ```
-1. Run `pyspark --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.0 < stream_app.py` to execute structred streaming. It shows kafka messages in console.
+4. Run `pyspark --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.0 < stream_app.py` in Visual Studio Code terminal to execute structred streaming. It shows telemetry in console.
 
 ### environment variable example
 |Name|Example|IoT Hub Build-in endpoints name|
