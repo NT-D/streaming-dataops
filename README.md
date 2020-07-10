@@ -1,6 +1,6 @@
 # streaming-dataops
 - Sample repo for understanding spark structured streaming and data ops
-- You can utilize device simulator in my [GitHub](https://github.com/NT-D/streaming-dataops-device)
+- You can utilize device simulator in my [GitHub](https://github.com/NT-D/streaming-dataops-device). It can send expected telemetry to IoT Hub and Spark.
 
 ## Run app
 1. Set environment variable with event hub (IoT Hub) information
