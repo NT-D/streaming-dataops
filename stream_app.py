@@ -48,5 +48,10 @@ schemaedStreamDf = rowStreamDf.select(from_json("value", schema).alias("json")) 
     )
 
 # Write data in the console
-stream = schemaedStreamDf.writeStream.outputMode('append').format('console').start()
-stream.awaitTermination()
+try:
+    stream = schemaedStreamDf.writeStream.outputMode('append').format('console').start()
+    stream.awaitTermination()
+except:
+    # If the query has terminated with an exception, then the exception will be thrown.
+    # Can write code for sending alert/email to IT admin to know
+    print("Streaming is terminated by exception")
