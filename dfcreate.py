@@ -5,7 +5,7 @@ from pyspark.sql.functions import col
 spark = SparkSession.builder.master('local').getOrCreate()
 
 # Define data schema, then set data
-user_row = Row('birth','age','is_fan')
+user_row = Row('birth', 'age', 'is_fan')
 
 data = [
     user_row('1990-01-01', 29, True),
