@@ -1,8 +1,7 @@
 import os
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, from_json
-from pyot import schema
-from pyot import connector
+from pyot import connector, aggregate
+
 
 # Initialize spark env
 # spark = SparkSession.builder.master('local').getOrCreate()
@@ -21,29 +20,17 @@ raw_streaming_df = connector.create_eventhub_streamdf(
     EVENTHUB_CONSUMER_GROUP
 )
 
-# Apply schema for later phase
-schemaed_df = (raw_streaming_df
-               .withColumn("body", from_json("body", schema.basic_sensor))
-               .withColumn("temperature", col("body.temperature"))
-               .withColumn("humidity", col("body.humidity"))
-               .withColumn("deviceid", col("systemProperties.iothub-connection-device-id"))
-               .drop("body")
-               )
+aggregated_df = aggregate.create_averaged_df(raw_streaming_df, 30, 60)
 
 # Write data in the console
 try:
-    stream = (schemaed_df
+    stream = (aggregated_df
               .writeStream
               .outputMode('append')
               .format('console')
               .start()
               )
     stream.awaitTermination()
-
+    
 except KeyboardInterrupt:
     print("Streaming is terminated by user input")
-
-except Exception:
-    # If the query has terminated with an exception, exception will be thrown.
-    # Can write code for sending alert/email to IT admin to know
-    print("Streaming is terminated by exception")
