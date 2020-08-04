@@ -8,7 +8,8 @@ def create_averaged_df(raw_streaming_df, window_sec, watermark_sec):
         .withColumn("body", from_json("body", schema.basic_sensor)) \
         .withColumn("temperature", col("body.temperature")) \
         .withColumn("humidity", col("body.humidity")) \
-        .withColumn("deviceid", col("systemProperties.iothub-connection-device-id")) \
+        .withColumn("deviceid", 
+                    col("systemProperties.iothub-connection-device-id")) \
         .withColumn("enqueuedTime", col("enqueuedTime").cast("timestamp")) \
         .drop("body")
 
