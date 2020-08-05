@@ -1,0 +1,5 @@
+pyspark==2.4.5
+pytest
+setuptools
+wheel
+databricks-cli
