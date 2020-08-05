@@ -1,4 +1,5 @@
-from pyspark.sql.types import StructType, StructField, DoubleType
+from pyspark.sql.types import StructType, StructField, \
+     DoubleType, StringType, IntegerType
 
 # Set and apply schema
 # Created simulator device in another repo
@@ -8,4 +9,23 @@ from pyspark.sql.types import StructType, StructField, DoubleType
 basic_sensor = StructType([
     StructField("temperature", DoubleType(), False),
     StructField("humidity", DoubleType(), False)
+])
+
+
+# Use for test logics
+eventhub_schema = StructType([
+    StructField("body", StringType(), True),
+    StructField("partition", StringType(), True),
+    StructField("offset", StringType(), True),
+    StructField("sequenceNumber", StringType(), True),
+    StructField("enqueuedTime", StringType(), True),
+    StructField("properties", StructType([]), True),
+    StructField("systemProperties", StructType([
+        StructField("iothub-enqueuedtime", StringType(), True),
+        StructField("iothub-connection-auth-method", StringType(), True),
+        StructField("iothub-connection-auth-generation-id", StringType(),
+                    True),
+        StructField("iothub-connection-device-id", StringType(), True),
+        StructField("iothub-message-source", StringType(), True)
+    ]), True)
 ])
