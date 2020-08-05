@@ -3,12 +3,12 @@ pool:
 
 steps:
 - task: UsePythonVersion@0
-    inputs:
-        versionSpec: '3.7'
-        architecture: 'x64'
+  inputs:
+    versionSpec: '3.7'
+    architecture: 'x64'
 
 - script: pip install --upgrade pip && pip install -r requirements.txt
-    displayName: 'Install requirements'
+  displayName: 'Install requirements'
 
 - script: pytest 
-    displayName: 'Run test'
+  displayName: 'Run test'
