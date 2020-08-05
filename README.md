@@ -2,6 +2,7 @@ TODO:
 - Documentation
     - Update repository problem statement (motivation) and goal.
     - Add architecutre diagram
+    - Add document about how to create and store sample data
 - Add Unit test
 - Add CI/CD pipeline with DataBricks CLI
 - Monitor streaming and alert to admin team whenever streaming job fail
@@ -44,6 +45,8 @@ I'll update this section, because I want to automate it with CI/CD pipeline. Cur
 1. Run `databricks clusters start --cluster-id {Your cluster id}` to start your cluster
 1. Install own python library by runnning `databricks libraries install --cluster-id {Your cluster id} --whl "dbfs:/FileStore/whls/pyot-0.0.1-py3-none-any.whl"`
 
+### Install required package
+1. Install Event Hub connector by running `databricks libraries install --cluster-id {Your cluster id} --maven-coordinates com.microsoft.azure:azure-eventhubs-spark_2.11:2.3.16`
 
 ## Reference
 ### DataOps strategy
