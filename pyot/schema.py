@@ -1,5 +1,4 @@
-from pyspark.sql.types import StructType, StructField, \
-     DoubleType, StringType, IntegerType
+from pyspark.sql.types import StructType, StructField, DoubleType, StringType
 
 # Set and apply schema
 # Created simulator device in another repo
