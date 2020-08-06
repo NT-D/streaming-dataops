@@ -35,7 +35,7 @@ steps:
     dbfs cp "./dist/pyot-0.0.1-py3-none-any.whl" dbfs:/FileStore/whls
     echo "Start cluster and install package to it"
     databricks clusters start --cluster-id $(databricks-cluster-id)
-    databricks libraries install --cluster-id $(databricks-cluster-id) --whl "dbfs:/FileStore/whls/pyot-0.0.1-py3-none-any.whl
+    databricks libraries install --cluster-id $(databricks-cluster-id) --whl dbfs:/FileStore/whls/pyot-0.0.1-py3-none-any.whl
     echo "Installing event-hub spark connector"
     databricks libraries install --cluster-id $(databricks-cluster-id) --maven-coordinates com.microsoft.azure:azure-eventhubs-spark_2.11:2.3.16
   env:
