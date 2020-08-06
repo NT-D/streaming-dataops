@@ -12,3 +12,6 @@ steps:
 
 - script: pytest 
   displayName: 'Run test'
+
+- script: python setup.py sdist bdist_wheel
+  displayName: 'Build python package'
