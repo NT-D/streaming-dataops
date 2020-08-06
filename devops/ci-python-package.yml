@@ -15,3 +15,9 @@ steps:
 
 - script: python setup.py sdist bdist_wheel
   displayName: 'Build python package'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: './dist'
+    ArtifactName: 'pyot'
+  displayName: 'Publish python package'
