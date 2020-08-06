@@ -46,4 +46,5 @@ def test_aggregate_sensordata(spark):
 
     assert aggregated_result.isStreaming
     # test data has 30 sec duration
+    # TODO: Let's see overlapping window
     assert result.first()["count"] == 30 / window_sec
