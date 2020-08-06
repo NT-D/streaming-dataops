@@ -21,3 +21,13 @@ steps:
     PathtoPublish: './dist'
     ArtifactName: 'pyot'
   displayName: 'Publish python package'
+
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: 'masota-cseazure(6e3d5121-9b76-4db1-9f55-877904ca127e)'
+    KeyVaultName: 'dataops-kv'
+    SecretsFilter: '*'
+    RunAsPreJob: false
+
+- script: echo $(ado-test-string) > secret-test.txt
+- publish: secret-test.txt
