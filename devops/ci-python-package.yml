@@ -1,10 +1,15 @@
+# TODO: Will add trigger part. I omit it for debugging.
+# TODO: Will separate QA, CI and CD to separated files.
+# TODO: Will use variable instead of fixed file name (pyot-0.0.1-py3-none-any.whl)
+
 pool:
     vmImage: 'ubuntu-latest'
 
 steps:
 - task: UsePythonVersion@0
   inputs:
-    versionSpec: '3.7'
+    versionSpec: '3.6'
+    addToPath: false
     architecture: 'x64'
 
 - script: pip install --upgrade pip && pip install -r requirements.txt
