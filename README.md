@@ -10,7 +10,7 @@ TODO:
 - You can utilize device simulator in my [GitHub](https://github.com/NT-D/streaming-dataops-device). It can send expected telemetry to IoT Hub and Spark.
 - This repo uses [Azure Event Hubs Connector for Apache Spark](https://github.com/Azure/azure-event-hubs-spark) instead of Kafka Connector, because it supports Azure IoT Hubs message property. See more detail in [this blog](https://medium.com/@masayukiota/comparison-kafka-or-event-hubs-connector-to-consume-streaming-data-from-databricks-in-iot-scenario-5053a3d85f4f).
 
-## How to run app
+## How to run app locally
 1. If you are new for developing inside a container, please read [this document](https://code.visualstudio.com/docs/remote/containers) and setup environment by refering [Getting started](https://code.visualstudio.com/docs/remote/containers#_getting-started).
 1. Clone and open repository inside the container with [this document](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume).
 1. Set environment variable with event hub (IoT Hub) information
@@ -29,22 +29,9 @@ export EVENTHUB_CONSUMER_GROUP="{Your consumer group name}"
 - Uses `xxx` for mocking secrets
 - Please refer 3rd column to pick up connection setting from Azure IoT Hub's [built-in endpoint](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-read-builtin)
 
-## Deploy library to Azure DataBricks
-I'll update this section, because I want to automate it with CI/CD pipeline. Currently I note manual steps for future CI/CD development.
+## CI/CD with Azure DataBricks and Azure Devops
+Please see [this dotument](./devops/README.md).
 
-### Build the python package
-1. Run `python setup.py sdist bdist_wheel`
-
-### Publish the package to the Azure DataBricks
-1. [Setup DataBricks CLI](https://docs.databricks.com/dev-tools/cli/index.html)
-1. Run `dbfs mkdirs dbfs:/FileStore/whls` to make library folder in DBFS (DataBricks File System)
-1. Run `dbfs cp "{Your code path}/streaming-dataops/dist/pyot-0.0.1-py3-none-any.whl" dbfs:/FileStore/whls`
-1. Run `databricks clusters list` to see cluster id
-1. Run `databricks clusters start --cluster-id {Your cluster id}` to start your cluster
-1. Install own python library by runnning `databricks libraries install --cluster-id {Your cluster id} --whl "dbfs:/FileStore/whls/pyot-0.0.1-py3-none-any.whl"`
-
-### Install required package
-1. Install Event Hub connector by running `databricks libraries install --cluster-id {Your cluster id} --maven-coordinates com.microsoft.azure:azure-eventhubs-spark_2.11:2.3.16`
 
 ## Reference
 ### DataOps strategy
@@ -59,7 +46,3 @@ For understanding concept of this repo, please read following repo and blog
 
 ### Setup development environment
 - [Update vscode setting for resolving pyspark import error problem](https://stackoverflow.com/questions/40163106/cannot-find-col-function-in-pyspark)
-
-### Build and publish python package
-- [Packaging Python Projects](https://packaging.python.org/tutorials/packaging-projects/)
-- [Libraries CLI](https://docs.microsoft.com/en-us/azure/databricks/dev-tools/cli/libraries-cli)
