@@ -32,6 +32,7 @@ steps:
 - script: |
     echo "Uploading package to DBFS"
     dbfs mkdirs dbfs:/FileStore/whls
+    dbfs rm dbfs:/FileStore/whls/pyot-0.0.1-py3-none-any.whl
     dbfs cp "./dist/pyot-0.0.1-py3-none-any.whl" dbfs:/FileStore/whls
     echo "Start cluster and install package to it"
     databricks clusters start --cluster-id $(databricks-cluster-id)
