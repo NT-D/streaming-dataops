@@ -9,7 +9,7 @@ steps:
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.6'
-    addToPath: false
+    addToPath: true
     architecture: 'x64'
 
 - script: pip install --upgrade pip && pip install -r requirements.txt
