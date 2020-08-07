@@ -3,8 +3,6 @@ TODO:
     - Update repository problem statement (motivation) and goal.
     - Add architecutre diagram
     - Add document about how to create and store sample data
-- Add Unit test
-- Add CI/CD pipeline with DataBricks CLI
 - Monitor streaming and alert to admin team whenever streaming job fail
 
 # streaming-dataops
