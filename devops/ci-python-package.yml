@@ -1,3 +1,7 @@
+# TODO: Will add trigger part. I omit it for debugging.
+# TODO: Will separate QA, CI and CD to separated files.
+# TODO: Will use variable instead of fixed file name (pyot-0.0.1-py3-none-any.whl)
+
 pool:
     vmImage: 'Ubuntu-16.04'
 
