@@ -29,8 +29,8 @@ steps:
 
 - task: AzureKeyVault@1
   inputs:
-    azureSubscription: 'masota-cseazure(6e3d5121-9b76-4db1-9f55-877904ca127e)'
-    KeyVaultName: 'dataops-kv'
+    azureSubscription: '{Please input your Azure Subscription}'
+    KeyVaultName: '{Please input your Key-Vault name}'
     SecretsFilter: '*'
     RunAsPreJob: false
 
