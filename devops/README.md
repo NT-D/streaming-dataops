@@ -30,7 +30,8 @@ Upload whl package to DataBrciks and install it to specific cluster
 1. [Get Databricks personal access token](https://docs.databricks.com/dev-tools/api/latest/authentication.html).
 1. Save following secrets in Azure KeyVault
 1. Setup Azure Pipeline with `devops/ci-python-package.yml` and run pipeline. You can refer [this page](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python?view=azure-devops#create-the-pipeline) to know how to setup pipeline.
-   - After the step 6 in the document, please select **Existing Azure Pipelines YAML file** in [Configure] tag, then you can select YAML file in [Path] dropdown menu in pop-up window to utilize our pipeline.
+   - After the step 6 in the document, please select **Existing Azure Pipelines YAML file** in [Configure] tab, then you can select YAML file in [Path] dropdown menu in pop-up window to utilize our pipeline.
+   - In the [Review] tab, you can setup KeyVault configuration. Please click **Settings** just above the **task: AzureKeyVault@1**, so that you can setup your Azure subscription and Key vault name.
 
 ### Required secrets
 |Secrets name|Secret value|
