@@ -29,8 +29,8 @@ steps:
 
 - task: AzureKeyVault@1
   inputs:
-    azureSubscription: '{Please input your Azure Subscription}'
-    KeyVaultName: '{Please input your Key-Vault name}'
+    azureSubscription: $(azure-subscription)
+    KeyVaultName: $(key-vault-name)
     SecretsFilter: '*'
     RunAsPreJob: false
 
