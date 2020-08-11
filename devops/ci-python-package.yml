@@ -1,0 +1,49 @@
+# TODO: Will add trigger part. I omit it for debugging.
+# TODO: Will separate QA, CI and CD to separated files.
+# TODO: Will use variable instead of fixed file name (pyot-0.0.1-py3-none-any.whl)
+
+pool:
+    vmImage: 'ubuntu-latest'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.6'
+    addToPath: true
+    architecture: 'x64'
+
+- script: pip install --upgrade pip && pip install -r requirements.txt
+  displayName: 'Install requirements'
+
+- script: pytest 
+  displayName: 'Run test'
+
+- script: python setup.py sdist bdist_wheel
+  displayName: 'Build python package'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: './dist'
+    ArtifactName: 'pyot'
+  displayName: 'Publish python package'
+
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: $(azure-subscription)
+    KeyVaultName: $(key-vault-name)
+    SecretsFilter: '*'
+    RunAsPreJob: false
+
+- script: |
+    echo "Uploading package to DBFS"
+    dbfs mkdirs dbfs:/FileStore/whls
+    dbfs rm dbfs:/FileStore/whls/pyot-0.0.1-py3-none-any.whl
+    dbfs cp "./dist/pyot-0.0.1-py3-none-any.whl" dbfs:/FileStore/whls
+    echo "Start cluster and install package to it"
+    databricks clusters start --cluster-id $(databricks-cluster-id)
+    databricks libraries install --cluster-id $(databricks-cluster-id) --whl dbfs:/FileStore/whls/pyot-0.0.1-py3-none-any.whl
+    echo "Installing event-hub spark connector"
+    databricks libraries install --cluster-id $(databricks-cluster-id) --maven-coordinates com.microsoft.azure:azure-eventhubs-spark_2.11:2.3.16
+  env:
+    DATABRICKS_HOST: $(databricks-host)
+    DATABRICKS_TOKEN: $(databricks-token)
