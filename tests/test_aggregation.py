@@ -21,7 +21,7 @@ def test_aggregate_sensordata(spark):
     # Write data in the console
     initialDF = (spark
                  .readStream
-                 # Read 1 file/trigger. It emmulcate streaming
+                 # Read 1 file/trigger. It emulate streaming
                  .option("maxFilesPerTrigger", 1)
                  .schema(schema.eventhub_schema)
                  .json(file_location)
