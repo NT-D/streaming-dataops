@@ -6,5 +6,8 @@
         "--generated-members=pyspark.*",
         "--extension-pkg-whitelist=pyspark",
         "--ignored-modules=pyspark.sql.functions",
-    ]
+    ],
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true
 }

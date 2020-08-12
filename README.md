@@ -2,34 +2,35 @@ TODO:
 - Documentation
     - Update repository problem statement (motivation) and goal.
     - Add architecutre diagram
-- Add Unit test
-- Add CI/CD pipeline including submit spark jobs
+    - Add document about how to create and store sample data
 - Monitor streaming and alert to admin team whenever streaming job fail
 
 # streaming-dataops
-- Sample repo for understanding spark structured streaming and data ops
+- Sample repo for understanding spark structured streaming and data ops with DataBricks and Azure IoT tools
 - You can utilize device simulator in my [GitHub](https://github.com/NT-D/streaming-dataops-device). It can send expected telemetry to IoT Hub and Spark.
+- This repo uses [Azure Event Hubs Connector for Apache Spark](https://github.com/Azure/azure-event-hubs-spark) instead of Kafka Connector, because it supports Azure IoT Hubs message property. See more detail in [this blog](https://medium.com/@masayukiota/comparison-kafka-or-event-hubs-connector-to-consume-streaming-data-from-databricks-in-iot-scenario-5053a3d85f4f).
 
-## How to run app
+## How to run app locally
 1. If you are new for developing inside a container, please read [this document](https://code.visualstudio.com/docs/remote/containers) and setup environment by refering [Getting started](https://code.visualstudio.com/docs/remote/containers#_getting-started).
 1. Clone and open repository inside the container with [this document](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume).
 1. Set environment variable with event hub (IoT Hub) information
 ```shell
 export EVENTHUB_CONNECTION_STRING="{Your event hub connection string}"
-export EVENTHUB_NAMESPACE="{Your event hub name space}"
-export EVENT_HUB_NAME="{Your event hub name}"
+export EVENTHUB_CONSUMER_GROUP="{Your consumer group name}"
 ```
-4. Run `pyspark --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.0 < stream_app.py` in Visual Studio Code terminal to execute structred streaming. It shows telemetry in console.
+4. Run `pyspark --packages com.microsoft.azure:azure-eventhubs-spark_2.11:2.3.16 < stream_app.py` in Visual Studio Code terminal to execute structred streaming. It shows telemetry in console.
 
 ### environment variable example
 |Name|Example|IoT Hub Build-in endpoints name|
 |--|--|--|
 |EVENTHUB_CONNECTION_STRING|`Endpoint=sb://xxx.servicebus.windows.net/;  SharedAccessKeyName=xxxxx;SharedAccessKey=xxx;EntityPath=xxxx`|Event Hub-compatible endpoint|
-|EVENTHUB_NAMESPACE|`xxxx.servicebus.windows.net`|Pick up from `Event Hub-compatible endpoint string`|
-|EVENT_HUB_NAME|Unique event hub name such as `streaming-ops-masota`|Event Hub-compatible name|
+|EVENTHUB_CONSUMER_GROUP|Consume group name which you created. Default is `$Default`|Consumer Groups|
 
 - Uses `xxx` for mocking secrets
-- If you use Azure IoT Hubs, please refer 3rd column to pick up connection setting from [built-in endpoint](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-read-builtin)
+- Please refer 3rd column to pick up connection setting from Azure IoT Hub's [built-in endpoint](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-read-builtin)
+
+## CI/CD with Azure DataBricks and Azure Devops
+Please see [this dotument](./devops/README.md).
 
 
 ## Reference
