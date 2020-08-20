@@ -45,7 +45,7 @@ Please see [this dotument](./devops/README.md).
 # Utilize `pyot` library from Databricks notebook
 In the Notebook, app fetches secrets from Azure KeyVault, so you need to setup it at first.
 1. Save your `EVENTHUB_CONNECTION_STRING`'s value (Event Hub-compatible endpoint in IoT Hub) as `iot-connection-string` secret in Azure KeyVault. Please refer [this document](https://docs.microsoft.com/en-us/azure/key-vault/secrets/quick-create-portal).
-1. Setup Azure Key Vault-backed scope in your Azure DataBricks. Please add `key-vault-secrets` as scope name. Plase refer [this document](https://docs.microsoft.com/en-us/azure/databricks/security/secrets/secret-scopes#--create-an-azure-key-vault-backed-secret-scope).
+1. Setup Azure Key Vault-backed scope in your Azure DataBricks. Please add `key-vault-secrets` as scope name. Please refer [this document](https://docs.microsoft.com/en-us/azure/databricks/security/secrets/secret-scopes#--create-an-azure-key-vault-backed-secret-scope).
 1. Please import `ProcessStreaming.py` under `notebooks` folder to your Databricks and run it on a cluster.
 
 
